@@ -695,12 +695,12 @@ void MainWindow::onCheckUpdate()
             appendLog(QString("检查更新网络错误：%1").arg(reply->errorString()));
         }
 
-        appendLog(QString("检查更新完成，远程版本：%1，当前版本：%2")
+        appendLog(QString("检查更新完成,远程版本：%1,当前版本：%2")
                       .arg(remoteVer, m_currentVersion));
 
         if (remoteVer == "获取失败") {
             showHandMessageBox(QMessageBox::Warning, "检查更新",
-                               "无法连接到服务器，请检查网络。");
+                               "无法连接到服务器,请检查网络;");
             return;
         }
 
@@ -719,7 +719,7 @@ void MainWindow::onCheckUpdate()
             }
         } else {
             showHandMessageBox(QMessageBox::Information, "检查更新",
-                               QString("当前已是最新版本。\n\n远程版本：%1\n当前版本：%2")
+                               QString("当前已是最新版本;\n\n远程版本：%1\n当前版本：%2")
                                    .arg(remoteVer, m_currentVersion));
         } });
 }

@@ -1,9 +1,9 @@
 # Changelog
 
-所有本项目的显著更改都将记录在此文件中。
+所有本项目的显著更改都将记录在此文件中;
 
-格式基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/)，
-并且本项目遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
+格式基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/),
+并且本项目遵循 [语义化版本](https://semver.org/lang/zh-CN/);
 
 ## [1.0.12] - 2026-05-14 08:55
 ### 优化

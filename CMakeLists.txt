@@ -1,4 +1,4 @@
-﻿# CMakeList.txt: GitHubDesktopToCN 的 CMake 项目，仅支持 x64 构建
+﻿# CMakeList.txt: GitHubDesktopToCN 的 CMake 项目,仅支持 x64 构建
 #
 cmake_minimum_required (VERSION 3.30)
 
@@ -44,7 +44,7 @@ project ("GitHubDesktopToCN")
 # 永久本地化 FetchContent 下载目录
 set(FETCHCONTENT_BASE_DIR "${CMAKE_SOURCE_DIR}/.fetched" CACHE PATH "Directory where FetchContent downloads are stored")
 
-# 添加 Qt 支持（x64），需要 Network 用于检查更新
+# 添加 Qt 支持（x64）,需要 Network 用于检查更新
 find_package(Qt6 REQUIRED COMPONENTS Widgets Network)
 
 set(CMAKE_AUTOMOC ON)
@@ -64,7 +64,7 @@ file(GLOB_RECURSE PREBUILT_RESOURCE_FILES
 list(TRANSFORM PREBUILT_RESOURCE_FILES REPLACE "\\\\" "/")
 list(SORT PREBUILT_RESOURCE_FILES)
 
-# 直接写入 resources.qrc，不需要 .in 文件
+# 直接写入 resources.qrc,不需要 .in 文件
 set(QRC_PATH ${CMAKE_SOURCE_DIR}/resources.qrc)
 file(WRITE ${QRC_PATH} "<RCC>\n    <qresource prefix=\"/\">\n")
 foreach(file ${PREBUILT_RESOURCE_FILES})
@@ -96,7 +96,7 @@ add_executable (GitHubDesktopToCN
 
 set_target_properties(GitHubDesktopToCN PROPERTIES WIN32_EXECUTABLE TRUE)
 
-# 链接 OpenSSL 导入库（.lib 文件，用于链接；运行时需要对应的 .dll）
+# 链接 OpenSSL 导入库（.lib 文件,用于链接；运行时需要对应的 .dll）
 target_link_libraries(GitHubDesktopToCN PRIVATE
     ${CMAKE_SOURCE_DIR}/openssl-proj/lib/libssl.lib
     ${CMAKE_SOURCE_DIR}/openssl-proj/lib/libcrypto.lib)
@@ -125,7 +125,7 @@ if(WIN32)
             install(FILES ${LIB_CRYPTO_DLL} ${LIB_SSL_DLL} DESTINATION .)
             message(STATUS "已配置从 Qt bin 目录安装 OpenSSL DLL")
         else()
-            message(WARNING "未找到 OpenSSL DLL，HTTPS 可能不可用；请手动将 libcrypto-3-x64.dll 和 libssl-3-x64.dll 放置于可执行文件目录")
+            message(WARNING "未找到 OpenSSL DLL,HTTPS 可能不可用；请手动将 libcrypto-3-x64.dll 和 libssl-3-x64.dll 放置于可执行文件目录")
         endif()
     endif()
 endif()
