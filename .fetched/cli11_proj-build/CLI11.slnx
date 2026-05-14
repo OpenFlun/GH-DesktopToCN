@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Solution>
+	<Configurations>
+		<BuildType Name="Debug"/>
+		<BuildType Name="Release"/>
+		<BuildType Name="MinSizeRel"/>
+		<BuildType Name="RelWithDebInfo"/>
+		<Platform Name="x64"/>
+	</Configurations>
+	<Project Path="src/CLI11.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="6a5b7e9f-7f54-3e8a-a802-30b42acdcfb3">
+		<BuildDependency Project="D:/E-lang/GH-DesktopToCN/out/build/x64-debug/ZERO_CHECK.vcxproj"/>
+	</Project>
+	<Folder Name="/CMakePredefinedTargets/">
+		<Project Path="ALL_BUILD.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="fc15782a-0fc8-3dd6-bc47-f4a88d7f1466" DefaultStartup="true">
+			<BuildDependency Project="src/CLI11.vcxproj"/>
+			<BuildDependency Project="D:/E-lang/GH-DesktopToCN/out/build/x64-debug/ZERO_CHECK.vcxproj"/>
+			<Build Solution="Debug|*" Project="false"/>
+			<Build Solution="Release|*" Project="false"/>
+			<Build Solution="MinSizeRel|*" Project="false"/>
+			<Build Solution="RelWithDebInfo|*" Project="false"/>
+		</Project>
+		<Project Path="D:/E-lang/GH-DesktopToCN/out/build/x64-debug/ZERO_CHECK.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="e6ac8448-900e-37eb-88a5-b3460d3ec06c"/>
+	</Folder>
+</Solution>

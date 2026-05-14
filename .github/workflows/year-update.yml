@@ -1,0 +1,64 @@
+name: Auto Update License & Version
+
+on:
+  schedule:
+    # 每年1月1日 00:00 UTC 执行
+    - cron: '0 16 31 12 *'
+  # 也可以手动触发测试（可选）
+  workflow_dispatch:
+
+jobs:
+  update-and-publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # 允许推送代码
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # 获取完整历史以便提交
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'latest'  # 或你项目使用的版本
+          registry-url: 'https://registry.npmjs.org/'
+
+      - name: Configure Git
+        run: |
+          git config user.name "OpenFlun"
+          git config user.email "cn@flun.top"
+
+      - name: Update LICENSE year
+        run: |
+          # 提取 LICENSE 文件中的当前年份
+          current_year=$(awk '/Copyright \(c\)/ {match($0, /[0-9]{4}/); print substr($0, RSTART, RLENGTH)}' LICENSE)
+          if [ -z "$current_year" ]; then
+            echo "Error: Could not find year in LICENSE file."
+            exit 1
+          fi
+          new_year=$((current_year + 1))
+          # 替换年份
+          sed -i "s/Copyright (c) $current_year/Copyright (c) $new_year/" LICENSE
+          echo "Updated LICENSE year from $current_year to $new_year"
+
+      - name: Bump version in package.json
+        run: |
+          # 增加补丁版本号，但不自动打 tag 和 commit
+          npm version patch --no-git-tag-version
+          echo "Version bumped in package.json"
+
+      - name: Commit and push changes
+        run: |
+          if git diff --quiet && git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            git add LICENSE package.json
+            git commit -m "chore: auto-update license year and bump version [skip ci]"
+            git push
+          fi
+
+      - name: Publish to npm
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish
