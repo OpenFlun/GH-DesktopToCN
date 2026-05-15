@@ -1,5 +1,8 @@
-## 一、前置条件（已完成可跳过）
-- 已安装 **Visual Studio 2026 Build Tools**,路径：
+# CMAKE 编译指南(VScode和VS项目)
+
+## 一、通用前置条件（两种方式均需满足）
+
+- 已安装 **Visual Studio 2026 Build Tools**，路径：
   `C:\Program Files (x86)\Microsoft Visual Studio\18\BuildTools`
 - 项目根目录：`D:\E-lang\GH-DesktopToCN`（以下用 `%PROJECT%` 代指）
 - **确保 `openssl-proj\lib` 下有 64 位 OpenSSL 的导入库与动态库**：
@@ -7,88 +10,105 @@
   - `libcrypto.lib`
   - `libcrypto-3-x64.dll`
   - `libssl-3-x64.dll`
-- 确保 `.vscode` 下有两个配置文件：`settings.json` 和 `tasks.json`
-- 确保根目录存在 **`build.bat`**（内容见附件）
-*** 请根据自己的电脑配置替换成自己的相应文件路径 ***
----
+- 确保根目录存在 **`build.bat`**（内容见末尾附件）
+- 确保 `build.bat` 中的 Qt 路径正确（例如 `C:\Qt\6.11.0\msvc2022_64`）
 
-## 二、文件结构速查
-```
-D:\E-lang\GH-DesktopToCN\
-├── build.bat                  ← 一键构建脚本（加载环境、配置、编译、部署 Qt、复制 OpenSSL DLL）
-├── CMakeLists.txt
-├── CMakePresets.json
-├── openssl-proj\
-│   └── lib\
-│       ├── libssl.lib         (64位导入库)
-│       ├── libcrypto.lib      (64位导入库)
-│       ├── libcrypto-3-x64.dll
-│       └── libssl-3-x64.dll
-└── .vscode\
-    ├── settings.json
-    └── tasks.json
-```
+> **注意**：请根据自己的电脑配置替换成自己的相应文件路径。
 
 ---
 
-## 三、首次配置（只需一次）
-1. **CLI11 依赖**（自动处理）
-   - CLI11 会在 CMake 配置阶段通过 `FetchContent` 自动从 GitHub 下载,无需手动操作;
-   - 如果你的网络无法直接访问 GitHub,CMake 配置可能会失败;此时可以：
-     - 设置代理环境变量 `HTTP_PROXY` / `HTTPS_PROXY`,或
-     - 手动下载 CLI11 源码（v2.4.1）并解压到 `out/build/x64-debug/_deps/cli11_proj-src` 目录;
-2. 在 VS Code 中按 `Ctrl+Shift+B`,选择 **`Build x64`**,等待配置和编译通过;
-3. 构建成功后,可执行文件位于：
+## 二、使用 VS Code 构建时要求
+
+#### 所需文件
+- 确保 `.vscode` 下存在两个配置文件：
+  - `settings.json`（内容见末尾附件）
+  - `tasks.json` (内容见末尾附件)
+
+#### 操作步骤
+1. 在 VS Code 中按 `Ctrl+Shift+B`，选择 **`Build x64`**。
+2. 等待终端输出 `=== 生成完成 ===`。
+3. 构建成功后，可执行文件位于：
    `out\build\x64-debug\Debug\GitHubDesktopToCN.exe`
 
----
-
-## 四、日常构建（一键构建）
-1. 在 VS Code 中按 ** `Ctrl+Shift+B` 或 菜单中点击 ... ->终端 ->点击 运行生成任务**;
-2. 在弹出的任务列表中选择 **`Build x64`**（当前唯一任务）;
-3. 等待终端输出 `=== 生成完成 ===`,exe 位置同上;
-
-> **注意**：
-> - 编译成功 → 终端自动关闭,不留痕;
-> - 编译失败 → 终端保留错误信息,按任意键关闭;
+> **特点**：一键自动完成配置、编译、复制 OpenSSL DLL、部署 Qt 动态库。
+> **注意**：编译成功时终端自动关闭，失败则保留错误信息(如需保留窗口将 `tasks.json` 中的 "close": true 改为 "close": false);
 
 ---
 
-## 五、构建流程说明
-`build.bat` 会自动完成以下步骤：
-1. 加载 Visual Studio 2026 编译环境（amd64）;
-2. 检查 CMake 缓存,若源目录变化则自动清理旧缓存;
-3. 调用 CMake 配置（生成 Visual Studio 工程,架构固定为 x64）;
-4. 执行构建（Debug 模式）;
-5. **自动从 `openssl-proj\lib` 复制 OpenSSL 动态库**;
-6. 自动调用 `windeployqt` 部署所需的 Qt 动态库;
+## 三、使用 Visual Studio IDE 构建时要求
 
-**不需要手动切换库文件、不需要清除缓存;**
+#### 所需文件
+- 确保 `.vs` 目录下存在配置文件：
+  - `tasks.vs.json`（内容见末尾附件）
+
+#### 操作步骤
+1. 在 Visual Studio 中右键单击项目根节点（即主文件夹名称），在右键菜单中选择 **“运行 Build64”**
+2. 等待任务执行完毕，输出窗口显示 `=== 生成完成 ===`。
+3. 构建成功后，可执行文件位于：
+   `out\build\x64-debug\Debug\GitHubDesktopToCN.exe`
+
+> **特点**：与 VS Code 任务行为一致，一键完成全部构建和部署。
+> 注意事项也一样,不同的是:如需保留窗口将 `tasks.vs.json` 中的 '/c' 改为 '/K';
+
+---
+
+## 四、文件结构速查
+
+```
+D:\E-lang\GH-DesktopToCN\
+├── build.bat                     ← 一键构建脚本
+├── CMakeLists.txt
+├── openssl-proj\lib\
+│   ├── libssl.lib
+│   ├── libcrypto.lib
+│   ├── libcrypto-3-x64.dll
+│   └── libssl-3-x64.dll
+├── .vscode\                      ← VS Code 构建所需
+│   ├── settings.json
+│   └── tasks.json
+├── .vs\                          ← Visual Studio IDE 构建所需
+│   └── tasks.vs.json
+└── out\build\x64-debug\          ← 构建输出目录
+    └── Debug\GitHubDesktopToCN.exe
+```
+
+---
+
+## 五、构建流程说明（`build.bat` 自动完成）
+
+1. 加载 Visual Studio 2026 编译环境（amd64）
+2. 检查 CMake 缓存，自动清理不一致缓存
+3. CMake 配置（生成 Visual Studio 工程，架构 x64）
+4. 执行构建（Debug 模式）
+5. 从 `openssl-proj\lib` 复制 OpenSSL 动态库
+6. 调用 `windeployqt` 部署 Qt 动态库
 
 ---
 
 ## 六、常见问题
-| 现象                                         | 原因                 | 解决                                                                                                                |
-| -------------------------------------------- | -------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| 构建时提示“无法解析的外部符号 OPENSSL_...”   | 导入库文件缺失或损坏 | 检查 `openssl-proj\lib\libssl.lib` 和 `libcrypto.lib` 是否存在且为有效 64 位导入库;                                 |
-| 运行时提示“找不到 libcrypto-3-x64.dll”       | 动态库未正确复制     | 检查 `build.bat` 中复制 DLL 的步骤是否执行；或手动将 DLL 复制到 exe 所在目录;                                       |
-| 配置阶段报“找不到 cli11_proj-src”            | CLI11 下载失败       | 手动从 `https://github.com/CLIUtils/CLI11` 下载 v2.4.1 源码,解压到 `out\build\x64-debug\_deps\cli11_proj-src` 目录; |
-| 终端一闪而过,没看到错误                      | 成功时终端自动关闭   | 在 `tasks.json` 中临时将 `"close": true` 改为 `false`,复现后查看输出;                                               |
-| 按 `Ctrl+Shift+B` 没反应或直接执行不弹出选择 | 默认任务被锁定       | 检查 `tasks.json` 中 `Build x64` 是否误设 `"isDefault": true`,删掉该行即可;                                         |
 
+| 现象                                   | 原因             | 解决                                                                  |
+| -------------------------------------- | ---------------- | --------------------------------------------------------------------- |
+| 提示“无法解析的外部符号 OPENSSL_...”   | 导入库缺失或损坏 | 检查 `openssl-proj\lib\libssl.lib` 等是否存在且为有效 64 位导入库     |
+| 运行时提示“找不到 libcrypto-3-x64.dll” | 动态库未复制     | 检查 `build.bat` 中复制步骤，或手动将 DLL 复制到 exe 目录             |
+| 配置阶段报“找不到 cli11_proj-src”      | CLI11 下载失败   | 手动下载 v2.4.1 源码解压到 `out/build/x64-debug/_deps/cli11_proj-src` |
+| VS Code 终端一闪而过                   | 成功时自动关闭   | 临时修改 `tasks.json` 中 `"close": true` 为 `false` 后重试            |
+| Visual Studio 终端一闪而过             | 成功时自动关闭   | 临时修改 `tasks.vs.json` 中 `'\c'` 为 `'\k'` 后重试                   |
 ---
 
 ## 七、重要提醒
-- **永远不要手动修改 `build.bat` 和 `tasks.json`**,除非你确切知道后果;
-- **若重装系统或移动项目**,请重新确认 Visual Studio Build Tools 路径,并相应修改 `build.bat` 中的 `VsDevCmd.bat` 路径;
-- **`.vscode/settings.json` 中已禁用 CMake Tools 自动配置**,请勿开启,否则可能重现卡死;
-- **项目现在仅支持 64 位构建**,不再保留 32 位库和备份文件;
+
+- **不要手动修改 `build.bat` 以及 `.vscode`、`.vs` 下的配置文件**，除非明确知道后果。
+- 若重装系统或移动项目，请重新确认 `build.bat` 中的 `VsDevCmd.bat` 路径和 Qt 路径。
+- 项目仅支持 **64 位构建**。
+- `.vscode/settings.json` 中已禁用 CMake Tools 自动配置，请勿开启。
 
 ---
 
 ## 附件：关键文件内容
 
-### `build.bat`（位于项目根目录）
+### 1. `build.bat`（位于项目根目录）
+
 ```bat
 @echo off
 setlocal enabledelayedexpansion
@@ -203,7 +223,8 @@ echo === 生成完成 ===
 exit /b 0
 ```
 
-### `.vscode/tasks.json`
+### 2. `.vscode/tasks.json`
+
 ```json
 {
     "version": "2.0.0",
@@ -226,7 +247,8 @@ exit /b 0
 }
 ```
 
-### `.vscode/settings.json`
+### 3. `.vscode/settings.json`
+
 ```json
 {
     "cmake.configureOnOpen": false,
@@ -235,5 +257,26 @@ exit /b 0
     "cmake.configureEnvironment": {
         "CMAKE_TLS_VERIFY": "0"
     }
+}
+```
+
+### 4. `.vs/tasks.vs.json`
+
+```json
+{
+    "version": "0.2.1",
+    "tasks": [
+        {
+            "taskLabel": "Build64",
+            "appliesTo": "/",
+            "type": "default",
+            "command": "pwsh.exe",
+            "args": [
+                "-Command",
+                "Start-Process cmd.exe -ArgumentList '/c', 'build.bat' -WindowStyle Normal -WorkingDirectory '${workspaceRoot}'"
+            ],
+            "workingDirectory": "${workspaceRoot}"
+        }
+    ]
 }
 ```
