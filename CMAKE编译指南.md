@@ -158,7 +158,8 @@ if not exist "%OPENSSL_DLL_DIR%" echo 警告: OpenSSL DLL 目录不存在: %OPEN
 :: ===== 构建配置 =====
 set "BUILD_DIR=out\build\x64-debug"
 set "CACHE_FILE=%PROJECT_DIR%\%BUILD_DIR%\CMakeCache.txt"
-set "EXE_FILE=%PROJECT_DIR%\%BUILD_DIR%\Debug\GitHubDesktopToCN.exe"
+:: ★ 修改1：exe 实际在构建根目录，不是 Debug 子目录
+set "EXE_FILE=%PROJECT_DIR%\%BUILD_DIR%\GitHubDesktopToCN.exe"
 
 :: 检测无效编译器缓存
 if exist "%CACHE_FILE%" (
@@ -220,6 +221,7 @@ if errorlevel 1 ( echo 构建失败！ & exit /b 1 )
 
 :deploy
 echo 开始部署 Qt 动态库...
+:: 部署目标仍是 Debug 子目录（用于放置 DLL 和依赖）
 set "DEPLOY_TARGET_DIR=%PROJECT_DIR%\%BUILD_DIR%\Debug"
 if not exist "%EXE_FILE%" ( echo 错误：未找到可执行文件 & exit /b 1 )
 
@@ -229,7 +231,7 @@ timeout /t 1 /nobreak >nul
 
 cd /d "%PROJECT_DIR%"
 
-:: 备份 exe 文件
+:: 备份 exe 文件（从根目录）
 set "EXE_BACKUP=%TEMP%\GitHubDesktopToCN_backup.exe"
 copy /y "%EXE_FILE%" "%EXE_BACKUP%" >nul
 if errorlevel 1 ( echo 备份 exe 失败 & exit /b 1 )
@@ -238,6 +240,9 @@ if errorlevel 1 ( echo 备份 exe 失败 & exit /b 1 )
 echo 清空部署目录...
 rmdir /s /q "%DEPLOY_TARGET_DIR%" 2>nul
 mkdir "%DEPLOY_TARGET_DIR%"
+
+:: 重新设置 EXE_FILE 为 Debug 子目录下的路径
+set "EXE_FILE=%DEPLOY_TARGET_DIR%\GitHubDesktopToCN.exe"
 
 :: 恢复 exe 到 Debug 目录
 move /y "%EXE_BACKUP%" "%EXE_FILE%" >nul
