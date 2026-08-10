@@ -1,0 +1,10 @@
+^D:\E-LANG\GH-DESKTOPTOCN\.FETCHED\CLI11_PROJ-SRC\SRC\CMAKELISTS.TXT
+setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\18\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SD:/E-lang/GH-DesktopToCN -BD:/E-lang/GH-DesktopToCN/out/build/x64-debug --check-stamp-file D:/E-lang/GH-DesktopToCN/.fetched/cli11_proj-build/src/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

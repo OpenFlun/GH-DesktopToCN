@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\E-lang\GH-DesktopToCN\.fetched\cli11_proj-src\src\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="D:\E-lang\GH-DesktopToCN\.fetched\cli11_proj-src\include\CLI\App.hpp">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="D:\E-lang\GH-DesktopToCN\.fetched\cli11_proj-src\include\CLI\Config.hpp">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="D:\E-lang\GH-DesktopToCN\.fetched\cli11_proj-src\include\CLI\ConfigFwd.hpp">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="D:\E-lang\GH-DesktopToCN\.fetched\cli11_proj-src\include\CLI\Error.hpp">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="D:\E-lang\GH-DesktopToCN\.fetched\cli11_proj-src\include\CLI\Formatter.hpp">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="D:\E-lang\GH-DesktopToCN\.fetched\cli11_proj-src\include\CLI\FormatterFwd.hpp">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="D:\E-lang\GH-DesktopToCN\.fetched\cli11_proj-src\include\CLI\Macros.hpp">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="D:\E-lang\GH-DesktopToCN\.fetched\cli11_proj-src\include\CLI\Option.hpp">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="D:\E-lang\GH-DesktopToCN\.fetched\cli11_proj-src\include\CLI\Split.hpp">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="D:\E-lang\GH-DesktopToCN\.fetched\cli11_proj-src\include\CLI\StringTools.hpp">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="D:\E-lang\GH-DesktopToCN\.fetched\cli11_proj-src\include\CLI\TypeTools.hpp">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="D:\E-lang\GH-DesktopToCN\.fetched\cli11_proj-src\include\CLI\Validators.hpp">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="D:\E-lang\GH-DesktopToCN\.fetched\cli11_proj-src\include\CLI\Version.hpp">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="D:\E-lang\GH-DesktopToCN\.fetched\cli11_proj-src\include\CLI\Encoding.hpp">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="D:\E-lang\GH-DesktopToCN\.fetched\cli11_proj-src\include\CLI\Argv.hpp">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="D:\E-lang\GH-DesktopToCN\.fetched\cli11_proj-src\include\CLI\CLI.hpp">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="D:\E-lang\GH-DesktopToCN\.fetched\cli11_proj-src\include\CLI\Timer.hpp">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="D:\E-lang\GH-DesktopToCN\.fetched\cli11_proj-src\include\CLI\impl\App_inl.hpp">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="D:\E-lang\GH-DesktopToCN\.fetched\cli11_proj-src\include\CLI\impl\Config_inl.hpp">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="D:\E-lang\GH-DesktopToCN\.fetched\cli11_proj-src\include\CLI\impl\Formatter_inl.hpp">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="D:\E-lang\GH-DesktopToCN\.fetched\cli11_proj-src\include\CLI\impl\Option_inl.hpp">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="D:\E-lang\GH-DesktopToCN\.fetched\cli11_proj-src\include\CLI\impl\Split_inl.hpp">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="D:\E-lang\GH-DesktopToCN\.fetched\cli11_proj-src\include\CLI\impl\StringTools_inl.hpp">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="D:\E-lang\GH-DesktopToCN\.fetched\cli11_proj-src\include\CLI\impl\Validators_inl.hpp">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="D:\E-lang\GH-DesktopToCN\.fetched\cli11_proj-src\include\CLI\impl\Encoding_inl.hpp">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="D:\E-lang\GH-DesktopToCN\.fetched\cli11_proj-src\include\CLI\impl\Argv_inl.hpp">
+      <Filter>Header Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{0931CDCB-5335-3357-B172-50A5AE79E2C8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
