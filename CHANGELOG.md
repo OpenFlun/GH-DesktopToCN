@@ -5,6 +5,10 @@
 格式基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/),
 并且本项目遵循 [语义化版本](https://semver.org/lang/zh-CN);
 
+## [1.0.27] - 2026-08-10 21:36
+### 添加
+- 添加了一些缺失的映射;
+
 ## [1.0.26] - 2026-08-10 21:36
 ### 修复和优化
 - 修复和优化了 .md 文件相关漏洞和错误说明;
@@ -13,13 +17,7 @@
 ### 调试版本
 - 测试版本
 
-## [1.0.22] - 2026-08-10 16:04
-### 更新
-- 增加对GitHub桌面版3.6.3的汉化适配;
-### 修复
-- 修复了部分场景没有准确自动资源目录的问题;
-- 修复了'build.bat'构建时报找不到可执行文件的问题;
-
-[unreleased]: https://github.com/OpenFlun/GH-DesktopToCN/compare/v1.0.26...HEAD
-[1.0.20]: https://github.com/OpenFlun/GH-DesktopToCN/compare/v1.0.25...v1.0.26
-[1.0.19]: https://github.com/OpenFlun/GH-DesktopToCN/compare/v1.0.20...v1.0.21
+[unreleased]: https://github.com/OpenFlun/GH-DesktopToCN/compare/v1.0.27...HEAD
+[1.0.27]: https://github.com/OpenFlun/GH-DesktopToCN/compare/v1.0.26...v1.0.27
+[1.0.26]: https://github.com/OpenFlun/GH-DesktopToCN/compare/v1.0.25...v1.0.26
+[1.0.25]: https://github.com/OpenFlun/GH-DesktopToCN/compare/v1.0.24...v1.0.25
